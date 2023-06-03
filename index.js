@@ -3,14 +3,13 @@ const nums = document.getElementById('num-container');
 const fins = document.getElementById('fins');
 const endTimeInput = document.getElementById('endTimeInput');
 const startStopBtn = document.getElementById('startStopBtn');
-const themeToggleBtn = document.getElementById('themeToggleBtn');
-const body = document.body;
+const remainingTime = document.getElementById('remainingTime');
 
 endTimeInput.addEventListener('input', updateEndTime);
 
 let left = 15;
 let right = 45;
-let endTime = 1;
+let endTime = 0;
 let remainingSeconds = endTime * 60;
 let timerInterval;
 
@@ -70,26 +69,32 @@ function tickSec() {
   if (remainingSeconds <= 0) {
     clearInterval(timerInterval);
     playAlertSound();
-    endTimeInput.style.display = 'block'; // input 요소 보이기
+    endTimeInput.style.display = 'block';
     
   }
 }
 
 function updateRemainingTime() {
   const minutes = Math.floor(remainingSeconds / 60).toString().padStart(2, '0');
+  if (isNaN(minutes)) {
+    minutes = '00';
+  }  
   const seconds = (remainingSeconds % 60).toString().padStart(2, '0');
+  if (isNaN(seconds)) {
+    seconds = '00';
+  }
   document.getElementById('minutes').textContent = minutes;
   document.getElementById('seconds').textContent = seconds;
 }
 
 function startStopTimer() {
   if (timerInterval) {
-    endTimeInput.style.display = 'block'; // input 요소 보이기
+    endTimeInput.style.display = 'block';
     clearInterval(timerInterval);
     timerInterval = null;
     startStopBtn.textContent = '시작';
   } else {
-    endTimeInput.style.display = 'none'; // input 요소 숨기기
+    endTimeInput.style.display = 'none';
     timerInterval = setInterval(tickSec, 1000);
     startStopBtn.textContent = '정지';
   }
@@ -97,12 +102,14 @@ function startStopTimer() {
 
 function updateEndTime() {
   const input = endTimeInput.value;
-  if (input === '') {
-    remainingSeconds = 0;
-  } else {
-    endTime = parseInt(input);
-    remainingSeconds = endTime * 60;
+  let inputValue = parseInt(input);
+  if (isNaN(inputValue)) {
+    inputValue = 0;
   }
+  inputValue = Math.min(inputValue, 60);
+  inputValue = Math.max(inputValue, 0);
+  endTime = inputValue;
+  remainingSeconds = endTime * 60;
   updateRemainingTime();
   updateFins();
 }
@@ -112,9 +119,11 @@ function playAlertSound() {
   audio.play();
 }
 
+const themeToggleBtn = document.getElementById('themeToggleBtn');
+const body = document.body;
+
 function toggleTheme() {
   body.classList.toggle('dark-theme');
   const theme = body.classList.contains('dark-theme') ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
   themeToggleBtn.innerHTML = theme;
 }
-
