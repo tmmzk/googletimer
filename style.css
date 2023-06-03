@@ -6,7 +6,7 @@
 }
 
 body {
-    background-color: #FAFAFA;
+    background-color: rgb(250, 250, 250);
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -16,11 +16,11 @@ body {
 }
 
 .timer-container {
-    color: #212121;
+    color: rgb(33, 33, 33);
     display: inline-block;
     padding: 40px;
     border-radius: 20%;
-    border: 15px solid #212121;
+    border: 15px solid rgb(33, 33, 33);
     box-shadow: inset 0 0 5px 5px rgba(0, 0, 0, 0.3);
     position: relative;
     text-align: center;
@@ -38,7 +38,7 @@ body {
     width: 100%;
     height: 1px;
     top: calc(50% - 1px / 2);
-    background: #212121;
+    background: rgb(33, 33, 33);
     position: absolute;
     transition: background-color 0.5s ease;
 }
@@ -57,7 +57,7 @@ body {
     left: calc(4% / 2);
     top: calc(4% / 2);
     border-radius: 50%;
-    background: #fff;
+    background: rgb(255, 255, 255);
     z-index: 1;
     transition: background-color 0.5s ease;
 }
@@ -94,7 +94,7 @@ body {
     left: calc(50% - 18% / 2);
     top: calc(50% - 18% / 2);
     border-radius: 50%;
-    background: #fff;
+    background: rgb(255, 255, 255);
     z-index: 3;
     box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.2);
     transition: background-color 0.5s ease, box-shadow 0.5s ease;
@@ -107,8 +107,8 @@ body {
 input {
     width: 120px;
     height: 40px;
-    color: black;
-    background: #fafafa;
+    color: rgb(0, 0, 0);
+    background: rgb(250, 250, 250);
     font-size: 16px;
     border: none;
     border-radius: 20px;
@@ -127,8 +127,8 @@ input::-webkit-inner-spin-button {
 button {
     width: 120px;
     height: 40px;
-    color: #FAFAFA;
-    background: #004fff;
+    color: rgb(250, 250, 250);
+    background: rgb(0, 79, 255);
     font-size: 16px;
     border: none;
     border-radius: 20px;
@@ -148,7 +148,7 @@ button:hover {
 }
 
 button:disabled {
-    background-color: #ccc;
+    background-color: rgb(204, 204, 204);
     cursor: not-allowed;
 }
 
@@ -157,10 +157,16 @@ button:disabled {
     font-weight: bold;
     font-size: 20px;
     margin-bottom: 40px;
-    transition: color 0.5s ease;
+    transition: opactiy 0.5s ease;
+    display: none;
 }
 
 .btn-input {
+    position: fixed;
+    bottom: 0;
+    top: 60%;
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -183,31 +189,31 @@ button:disabled {
     width: 50px;
     height: 50px;
     border-radius: 50%;
- }
+}
 
 .dark-theme {
-    background-color: #212121;
-    color: #FAFAFA;
+    background-color: rgb(33, 33, 33);
+    color: rgb(250, 250, 250);
 }
 
 .dark-theme .timer-container {
-    border-color: #FAFAFA;
+    border-color: rgb(250, 250, 250);
 }
 
 .dark-theme .timer .line {
-    background: #FAFAFA;
+    background: rgb(250, 250, 250);
 }
 
 .dark-theme .timer .line.thick {
-    background: #FAFAFA;
+    background: rgb(250, 250, 250);
 }
 
 .dark-theme .timer .cover {
-    background: #212121;
+    background: rgb(33, 33, 33);
 }
 
 .dark-theme .num-box {
-    color: #FAFAFA;
+    color: rgb(250, 250, 250);
 }
 
 .dark-theme .fin {
@@ -215,20 +221,99 @@ button:disabled {
 }
 
 .dark-theme .timer .circle {
-    background: #212121;
+    background: rgb(33, 33, 33);
     box-shadow: 0 0 5px 5px rgba(250, 250, 250, 0.3);
 }
 
 .dark-theme input {
-    color: #212121;
-    background: #fafafa;
+    color: rgb(33, 33, 33);
+    background: rgb(250, 250, 250);
     box-shadow: 0 4px 16px rgba(250, 250, 250, 0.3);
 }
 
 .dark-theme .theme-toggle {
-    color: #FAFAFA;
+    color: rgb(250, 250, 250);
+}
+
+.dark-theme .popup-content {
+    background: rgb(33, 33, 33);
 }
 
 .theme-transition {
     transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease;
+}
+
+.settings {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    transition: transform 0.3s ease;
+}
+
+.settings button {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.popup-content {
+    background-color: rgb(255, 255, 255);
+    padding: 20px;
+    border-radius: 10px;
+    width: 500px;
+    text-align: center;
+}
+
+.setting-option {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.close-btn {
+    margin-top: 10px;
+    background: rgb(255, 57, 50);
+    box-shadow: 0 4px 16px rgba(252, 72, 65, 0.3);
+    cursor: default;
+}
+
+.close-btn:hover {
+    background: rgb(255, 57, 50, 0.9);
+    box-shadow: 0 4px 16px rgba(252, 72, 65, 0.6);
+}
+
+#darkModeButton {
+    width: 110px;
+    height: 40px;
+}
+
+#showTimeButton {
+    width: 150px;
+    height: 40px;
+}
+
+#AlarmButton {
+    width: 150px;
+    height: 40px;
+}
+
+.setting-option {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
 }

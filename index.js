@@ -1,9 +1,14 @@
+// DOM 요소 가져오기
 const lines = document.getElementById('lines');
 const nums = document.getElementById('num-container');
 const fins = document.getElementById('fins');
 const endTimeInput = document.getElementById('endTimeInput');
 const startStopBtn = document.getElementById('startStopBtn');
 const remainingTime = document.getElementById('remainingTime');
+const themeToggleBtn = document.getElementById('themeToggleBtn');
+const settingsBtn = document.getElementById('settingsBtn');
+const settingsPopup = document.getElementById('settingsPopup');
+const body = document.body;
 
 endTimeInput.addEventListener('input', updateEndTime);
 
@@ -12,6 +17,7 @@ let right = 45;
 let endTime = 0;
 let remainingSeconds = endTime * 60;
 let timerInterval;
+let isAlarmOn = true;
 
 for (let i = 0; i < 30; i++) {
   const line = document.createElement('div');
@@ -46,7 +52,6 @@ for (let i = 0; i < 6; i++) {
 
 function updateFins() {
   fins.innerHTML = '';
-
   for (let min = 0; min < endTime; min++) {
     for (let sec = 0; sec < 60; sec++) {
       const remainFin = document.createElement('div');
@@ -70,7 +75,7 @@ function tickSec() {
     clearInterval(timerInterval);
     playAlertSound();
     endTimeInput.style.display = 'block';
-    
+    startStopBtn.textContent = '시작';
   }
 }
 
@@ -94,18 +99,19 @@ function startStopTimer() {
     timerInterval = null;
     startStopBtn.textContent = '시작';
   } else {
-    endTimeInput.style.display = 'none';
     timerInterval = setInterval(tickSec, 1000);
+    const input = document.getElementById('endTimeInput');
+    input.value = '';
     startStopBtn.textContent = '정지';
+    endTimeInput.style.display = 'none';
+    donePopup.style.display = 'flex';
   }
 }
 
 function updateEndTime() {
   const input = endTimeInput.value;
   let inputValue = parseInt(input);
-  if (isNaN(inputValue)) {
-    inputValue = 0;
-  }
+  inputValue = isNaN(inputValue) ? 0 : inputValue;
   inputValue = Math.min(inputValue, 60);
   inputValue = Math.max(inputValue, 0);
   endTime = inputValue;
@@ -115,15 +121,53 @@ function updateEndTime() {
 }
 
 function playAlertSound() {
-  const audio = new Audio('alert.wav');
-  audio.play();
+  const audio = new Audio('alarm.wav');
+  if (isAlarmOn === true) {
+    audio.play();
+  }
 }
 
-const themeToggleBtn = document.getElementById('themeToggleBtn');
-const body = document.body;
+function openSettings() {
+  settingsPopup.style.display = 'flex';
+  body.classList.add('blur');
+}
 
-function toggleTheme() {
+function closeSettings() {
+  settingsPopup.style.display = 'none';
+  donePopup.style.display = 'none';
+  body.classList.remove('blur');
+}
+
+function toggleDarkMode() {
   body.classList.toggle('dark-theme');
-  const theme = body.classList.contains('dark-theme') ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
-  themeToggleBtn.innerHTML = theme;
+  const darkModeButton = document.getElementById('darkModeButton');
+  if (body.classList.contains('dark-theme')) {
+    darkModeButton.textContent = '라이트 모드';
+  } else {
+    darkModeButton.textContent = '다크 모드';
+  }
+}
+
+function toggleRemainingTime() {
+  const remainingTime = document.getElementById('remainingTime');
+  const remainingTimeButton = document.getElementById('showTimeButton');
+  remainingTime.style.display = remainingTime.style.display === 'block' ? 'none' : 'block';
+  if (remainingTime.style.display === 'none') {
+    remainingTimeButton.textContent = '남은 시간 보기';
+  } else {
+    remainingTimeButton.textContent = '남은 시간 숨기기';
+  }
+}
+
+function AlarmButton() {
+  const alarmButton = document.getElementById('AlarmButton');
+  if (!isAlarmOn) {
+    alarmButton.textContent = '완료 알림 끄기';
+    isAlarmOn = true;
+    console.log(isAlarmOn);
+  } else {
+    alarmButton.textContent = '완료 알림 켜기';
+    isAlarmOn = false;
+    console.log(isAlarmOn);
+  }
 }
