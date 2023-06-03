@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/a1ab77395a.js" crossorigin="anonymous"></script>
+    <title>Time Timer</title>
+</head>
+<body>
+    <div class="theme-toggle">
+        <button id="themeToggleBtn" onclick="toggleTheme()"><i class="fas fa-sun"></i></button>
+    </div>
+    <div class="timer-container">
+        <div id="timer" class="timer">
+            <div class="cover"></div>
+            <div id="lines"></div>
+            <div id="num-container"></div>
+            <div id="fins"></div>
+            <div class="circle"></div>
+        </div>
+    </div>
+    <div id="remainingTime"><span id="minutes">00</span>:<span id="seconds">00</span></div>
+    <div class="btn-input">
+        <input type="number" id="endTimeInput" max="60" min="1" maxlength='2' placeholder="분" pattern="\d*">
+        <button id="startStopBtn" onclick="startStopTimer()">시작</button>
+    </div>
+    <script src="index.js"></script>
+</body>
+</html>
