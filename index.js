@@ -72,11 +72,10 @@ function tickSec() {
   }
 
   if (remainingSeconds <= 0) {
+    endTimeInput.style.display = 'block';
     clearInterval(timerInterval);
     playAlertSound();
-    endTimeInput.style.display = 'block';
     startStopBtn.textContent = '시작';
-    endTimeInput.style.display = 'none';
     donePopup.style.display = 'flex';
   }
 }
@@ -101,6 +100,7 @@ function startStopTimer() {
     timerInterval = null;
     startStopBtn.textContent = '시작';
   } else {
+    endTimeInput.style.display = 'none';
     timerInterval = setInterval(tickSec, 1000);
     const input = document.getElementById('endTimeInput');
     input.value = '';
