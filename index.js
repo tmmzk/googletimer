@@ -76,6 +76,8 @@ function tickSec() {
     playAlertSound();
     endTimeInput.style.display = 'block';
     startStopBtn.textContent = '시작';
+    endTimeInput.style.display = 'none';
+    donePopup.style.display = 'flex';
   }
 }
 
@@ -103,8 +105,6 @@ function startStopTimer() {
     const input = document.getElementById('endTimeInput');
     input.value = '';
     startStopBtn.textContent = '정지';
-    endTimeInput.style.display = 'none';
-    donePopup.style.display = 'flex';
   }
 }
 
