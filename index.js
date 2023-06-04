@@ -8,9 +8,12 @@ const remainingTime = document.getElementById('remainingTime');
 const themeToggleBtn = document.getElementById('themeToggleBtn');
 const settingsBtn = document.getElementById('settingsBtn');
 const settingsPopup = document.getElementById('settingsPopup');
+const version = '1.0.5'; // 버전 정보를 상수로 정의합니다.
+const versionElement = document.getElementById('version');
 const body = document.body;
 
 endTimeInput.addEventListener('input', updateEndTime);
+versionElement.textContent = version;
 
 let left = 15;
 let right = 45;
@@ -94,17 +97,18 @@ function updateRemainingTime() {
 }
 
 function startStopTimer() {
-  if (timerInterval) {
-    endTimeInput.style.display = 'block';
-    clearInterval(timerInterval);
-    timerInterval = null;
-    startStopBtn.textContent = '시작';
-  } else {
+  if (!timerInterval) { // timerInterval이 null일 때만 타이머 시작
     endTimeInput.style.display = 'none';
     timerInterval = setInterval(tickSec, 1000);
     const input = document.getElementById('endTimeInput');
     input.value = '';
     startStopBtn.textContent = '정지';
+  }
+  else { // timerInterval이 null이 아니면 타이머 중지
+    endTimeInput.style.display = 'block';
+    clearInterval(timerInterval);
+    timerInterval = null;
+    startStopBtn.textContent = '시작';
   }
 }
 

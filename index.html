@@ -23,7 +23,6 @@
     <div class="btn-input">
         <input type="text" id="endTimeInput" placeholder="분" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" maxlength="2">
         <button id="startStopBtn" onclick="startStopTimer()">시작</button>
-        <!-- <button id="startStopBtn" onclick="startStopTimer()">초기화</button> -->
     </div>
     <div class="settings">
         <button id="settingsBtn" onclick="openSettings()"><i class="fas fa-cog"></i></button>
@@ -34,8 +33,10 @@
             <div class="setting-option">
                 <button id="darkModeButton" onclick="toggleDarkMode()">다크 모드</button>
                 <button id="showTimeButton" onclick="toggleRemainingTime()">남은 시간 보기</button>
-                <button id="AlarmButton" onclick="AlarmButton()">완료 알림 끄기</button>
+                <button id="AlarmButton" onclick="AlarmButton()">완료 알람 끄기</button>
             </div>
+            <a href="https://www.github.com/tmmzk" target="_blank" id="github-icon"><i class="fa-brands fa-github"></i></a>
+            <div class="version-info">v<span id="version"></span></div>
             <button class="close-btn" onclick="closeSettings()">종료</button>
         </div>
     </div>
