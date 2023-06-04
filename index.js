@@ -8,12 +8,9 @@ const remainingTime = document.getElementById('remainingTime');
 const themeToggleBtn = document.getElementById('themeToggleBtn');
 const settingsBtn = document.getElementById('settingsBtn');
 const settingsPopup = document.getElementById('settingsPopup');
-const version = '1.0.5'; // 버전 정보를 상수로 정의합니다.
-const versionElement = document.getElementById('version');
 const body = document.body;
 
 endTimeInput.addEventListener('input', updateEndTime);
-versionElement.textContent = version;
 
 let left = 15;
 let right = 45;

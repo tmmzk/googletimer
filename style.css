@@ -323,6 +323,11 @@ button:disabled {
   height: 40px;
 }
 
+#github-icon {
+    z-index: 1;
+    color: rgb(33, 33, 33);
+}
+
 .setting-option {
   display: flex;
   align-items: center;
@@ -332,9 +337,4 @@ button:disabled {
 
 input:focus {
   outline: none;
-}
-
-#github-icon {
-    z-index: 9999;
-    color: rgb(33, 33, 33);
 }
