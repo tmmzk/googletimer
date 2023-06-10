@@ -19,6 +19,11 @@ let remainingSeconds = endTime * 60;
 let timerInterval;
 let isAlarmOn = true;
 
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-GBG5P5314T');
+
 for (let i = 0; i < 30; i++) {
   const line = document.createElement('div');
   line.classList.add('line');
